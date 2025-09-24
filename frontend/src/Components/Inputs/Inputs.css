@@ -1,0 +1,11 @@
+.task-gathering {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.task-addition-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
