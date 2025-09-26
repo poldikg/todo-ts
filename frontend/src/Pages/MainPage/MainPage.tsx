@@ -22,7 +22,7 @@ const MainPage = () => {
   console.log(count);
   return (
     <div>
-      <Inputs updateCount={updateCount} />
+      <Inputs updateCount={updateCount} name="ivan" />
       <p>
         {data ? data.days[0] : ""} {data ? data.tasks[0] : ""}
       </p>

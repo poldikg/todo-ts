@@ -1,11 +1,13 @@
 import React from "react";
 import "./Inputs.css";
+import type { JSX } from "react";
 
-interface InputsProps {
+type InputsProps = {
   updateCount: (newCount: number) => void;
-}
+  name: string;
+};
 
-const Inputs: React.FC<InputsProps> = (props) => {
+const Inputs = (props: InputsProps): JSX.Element => {
   const weekDays: string[] = [
     "Monday",
     "Tuesday",
@@ -13,7 +15,7 @@ const Inputs: React.FC<InputsProps> = (props) => {
     "Thursday",
     "Friday",
   ];
-
+  console.log(props);
   const renderWeekDays = weekDays.map((day) => {
     return (
       <div>
