@@ -1,14 +1,28 @@
+//Hooks
 import { useState } from "react";
-import MainPage from "./Pages/MainPage/MainPage";
 
+//Components
+import MainPage from "./Pages/MainPage/MainPage";
+import Navbar from "./Components/Navigation/Navbar";
+import List from "./Pages/List/List";
+import { Routes, Route, useLocation } from "react-router";
+
+//Style
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const location = useLocation();
+  console.log(location);
 
   return (
     <>
-      <MainPage />
+      <Navbar />
+      {location.pathname === "/" && <MainPage />}
+
+      <Routes>
+        <Route path="/Tasks" element={<MainPage />} />
+        <Route path="/List" element={<List />} />
+      </Routes>
     </>
   );
 }

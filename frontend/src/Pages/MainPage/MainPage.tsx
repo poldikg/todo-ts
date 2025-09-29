@@ -2,17 +2,9 @@ import React from "react";
 import { useState } from "react";
 import Inputs from "../../Components/Inputs/Inputs";
 import Day from "../../Components/Day/Day";
+import type { JSX } from "react";
 
-const MainPage = () => {
-  type Weekdays = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday";
-  type UserData = {
-    days: Weekdays[];
-    tasks: string[];
-    date: string;
-    week?: number;
-  };
-  const [data, setData] = useState<UserData>();
-
+const MainPage = (): JSX.Element => {
   const [count, setCount] = useState<number>(0);
 
   const updateCount = (newCount: number): void => {
@@ -23,9 +15,6 @@ const MainPage = () => {
   return (
     <div>
       <Inputs updateCount={updateCount} name="ivan" />
-      <p>
-        {data ? data.days[0] : ""} {data ? data.tasks[0] : ""}
-      </p>
     </div>
   );
 };

@@ -1,0 +1,21 @@
+.navigation {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+  padding: 1.5em 2em;
+  border-bottom: 1px solid grey;
+}
+
+.navigation > a {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: ease-in-out 0.3s;
+}
+
+.navigation > a:hover {
+  color: rgb(150, 73, 73);
+  font-size: 1rem;
+}
