@@ -35,7 +35,7 @@ const tasksReducer = (state: UserData[], action: PayloadTypes): UserData[] => {
 
 export const TasksContext = createContext<any | null>(null);
 
-const TasksContextProvider = ({ children }: any) => {
+const TasksContextProvider = ({ children }: any): JSX.Element => {
   const initialState: UserData[] = [
     {
       id: "12356asdg12",
