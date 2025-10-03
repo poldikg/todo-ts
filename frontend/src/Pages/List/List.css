@@ -1,0 +1,21 @@
+.list-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 2em;
+}
+
+.list-task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 400px;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 1.5em 0.5em;
+}
+
+.btn-delete-task {
+  border: none;
+  cursor: pointer;
+}

@@ -26,9 +26,7 @@ const tasksReducer = (state: UserData[], action: PayloadTypes): UserData[] => {
   } else if (action.type === "ADD_TASK") {
     return [action.payload, ...state];
   } else if (action.type === "REMOVE_TASK") {
-    return (state = state.filter((task) => {
-      task.id !== action.payload.id;
-    }));
+    return state.filter((task) => task._id !== action.payload._id);
   } else {
     return state;
   }
@@ -42,7 +40,7 @@ export const TasksContext = createContext<{
 const TasksContextProvider = ({ children }: any): JSX.Element => {
   const initialState: UserData[] = [
     {
-      id: "12356asdg12",
+      _id: "12356asdg12",
       days: ["Monday", "Monday"],
       task: "asdasda",
       date: "29.09.2025",

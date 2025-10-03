@@ -27,7 +27,7 @@ type Weekdays =
   | { day: "Friday"; checked: boolean };
 
 export type UserData = {
-  id?: string;
+  _id?: string;
   days: WeekDaysNames[];
   task: string[] | string;
   date: string;
