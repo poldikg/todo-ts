@@ -10,6 +10,7 @@ import type { JSX } from "react";
 //Hooks
 import { useContext } from "react";
 import { TasksContext } from "../TasksContext/TasksContext";
+import useTaskContext from "../../Hooks/useTaskContext";
 
 type InputsProps = {
   updateCount: (newCount: number) => void;
@@ -26,15 +27,15 @@ type Weekdays =
   | { day: "Friday"; checked: boolean };
 
 export type UserData = {
-  id: string;
+  id?: string;
   days: WeekDaysNames[];
-  tasks: string[] | string;
+  task: string[] | string;
   date: string;
   week?: number;
 };
 
 const Inputs = (props: InputsProps): JSX.Element => {
-  const { state, dispatch } = useContext(TasksContext);
+  const { state, dispatch } = useTaskContext();
   const [checkboxCount, setCheckboxCount] = useState(0);
   const [weekDays, setWeekDays] = useState<Weekdays[]>([
     { day: "Monday", checked: false },
@@ -56,10 +57,10 @@ const Inputs = (props: InputsProps): JSX.Element => {
   const currentWeek = currentDate + "-" + lastDateOfWeek;
   console.log(currentWeek);
 
-  const renderTasks = state.map((t: UserData) => {
+  const renderTasks = [].map((t: UserData) => {
     return (
       <div>
-        <p>{t.tasks}</p>
+        <p>{t.task}</p>
       </div>
     );
   });
@@ -100,21 +101,31 @@ const Inputs = (props: InputsProps): JSX.Element => {
   const handleForm = (formData: FormData): void => {
     if (isDayChecked) {
       //Gets the task as a string
-      const task = formData.get("task");
+      const taskWritten = formData.get("task") as string;
 
       //Gets the days from the checkboxes and sets them in an array
-      const days = formData.getAll("days");
-      console.log(task, days, formData);
-      dispatch({
-        type: "ADD_TASK",
-        payload: {
-          id: "12356asdg12",
-          days: days,
-          tasks: task,
-          date: currentWeek,
-          week: 1,
-        },
-      });
+      const daysSelected = formData.getAll("days") as WeekDaysNames[];
+      console.log(taskWritten, daysSelected, formData);
+      const userInputData = {
+        days: daysSelected,
+        task: taskWritten,
+        date: currentWeek,
+        week: 1,
+      };
+
+      fetch("http://localhost:4000/api/tasks/", {
+        method: "POST",
+        body: JSON.stringify(userInputData),
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          dispatch({
+            type: "ADD_TASK",
+            payload: data,
+          });
+        });
 
       setWeekDays((prevDays: Weekdays[]): Weekdays[] => {
         return prevDays.map((day: Weekdays) => {

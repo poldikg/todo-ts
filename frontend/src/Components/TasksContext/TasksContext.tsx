@@ -1,11 +1,12 @@
 //Hooks
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useEffect } from "react";
+import type { Dispatch } from "react";
 
 //Type
 import type { UserData } from "../Inputs/Inputs";
 import type { JSX } from "react";
 
-type PayloadTypes =
+export type PayloadTypes =
   | {
       type: "GET_TASKS";
       payload: UserData[];
@@ -33,18 +34,31 @@ const tasksReducer = (state: UserData[], action: PayloadTypes): UserData[] => {
   }
 };
 
-export const TasksContext = createContext<any | null>(null);
+export const TasksContext = createContext<{
+  state: UserData[];
+  dispatch: Dispatch<PayloadTypes>;
+} | null>(null);
 
 const TasksContextProvider = ({ children }: any): JSX.Element => {
   const initialState: UserData[] = [
     {
       id: "12356asdg12",
       days: ["Monday", "Monday"],
-      tasks: "asdasda",
+      task: "asdasda",
       date: "29.09.2025",
       week: 1,
     },
   ];
+
+  useEffect(() => {
+    fetch("http://localhost:4000/api/tasks/")
+      .then((res) => res.json())
+      .then((data: UserData[]) =>
+        dispatch({ type: "GET_TASKS", payload: data })
+      );
+
+    console.log(state);
+  }, []);
 
   const [state, dispatch] = useReducer(tasksReducer, initialState);
   console.log(state);

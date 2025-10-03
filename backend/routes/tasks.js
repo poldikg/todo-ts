@@ -1,39 +1,27 @@
 const express = require("express");
-
 const router = express.Router();
 
-const Task = require("../models/Task");
+const {
+  createTask,
+  getAllTasks,
+  getTask,
+  updateTask,
+  deleteTask,
+} = require("../controllers/taskControllers");
 
 //GET all tasks
-router.get("/", (req, res) => {
-  res.json({ msg: "GET all tasks" });
-});
+router.get("/", getAllTasks);
 
 //GET a single task
-router.get("/:id", (req, res) => {
-  res.json({ msg: "Got a single workout" });
-});
+router.get("/:id", getTask);
 
 //POST a task
-router.post("/", async (req, res) => {
-  const { task, days, date } = req.body;
-
-  try {
-    const taskDocument = await Task.create({ task, days, date });
-    res.status(200).json(taskDocument);
-  } catch (error) {
-    res.status(400).json({ errMsg: error.message });
-  }
-});
+router.post("/", createTask);
 
 //DELETE a task
-router.delete("/:id", (req, res) => {
-  res.json({ msg: "Deleted a workout" });
-});
+router.delete("/:id", deleteTask);
 
 //UPDATE a task
-router.patch("/:id", (req, res) => {
-  res.json({ msg: "Updated a workout" });
-});
+router.patch("/:id", updateTask);
 
 module.exports = router;

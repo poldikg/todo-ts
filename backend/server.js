@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const cors = require("cors");
 const router = require("./routes/tasks");
 const mongoose = require("mongoose");
 
@@ -10,6 +11,7 @@ const app = express();
 //middleware
 
 //checks if there is a body when a request is made
+app.use(cors());
 app.use(express.json());
 
 app.use((req, res, next) => {
