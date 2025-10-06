@@ -14,7 +14,6 @@ const useTaskContext = () => {
       "useTaskContext must be used within a TasksContextProvider"
     );
   }
-  console.log(context);
   return context;
 };
 

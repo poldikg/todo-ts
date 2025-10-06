@@ -5,8 +5,6 @@
   margin: 0;
   box-sizing: border-box;
   font-family: "Montserrat";
-
+  min-width: max-content;
   font-weight: 400;
-
-  background-color: white;
 }

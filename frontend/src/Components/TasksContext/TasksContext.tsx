@@ -18,6 +18,10 @@ export type PayloadTypes =
   | {
       type: "ADD_TASK";
       payload: UserData;
+    }
+  | {
+      type: "UPDATE_TASK";
+      payload: UserData;
     };
 
 const tasksReducer = (state: UserData[], action: PayloadTypes): UserData[] => {
@@ -27,6 +31,10 @@ const tasksReducer = (state: UserData[], action: PayloadTypes): UserData[] => {
     return [action.payload, ...state];
   } else if (action.type === "REMOVE_TASK") {
     return state.filter((task) => task._id !== action.payload._id);
+  } else if (action.type === "UPDATE_TASK") {
+    return state.map((task) => {
+      return task._id === action.payload._id ? action.payload : task;
+    });
   } else {
     return state;
   }

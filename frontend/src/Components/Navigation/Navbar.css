@@ -4,6 +4,8 @@
   gap: 2em;
   padding: 1.5em 2em;
   border-bottom: 1px solid grey;
+  min-width: 100%;
+  position: sticky;
 }
 
 .navigation > a {

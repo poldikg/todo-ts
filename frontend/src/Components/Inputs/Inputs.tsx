@@ -22,14 +22,14 @@ type WeekDaysNames = "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday";
 type Weekdays =
   | { day: "Monday"; checked: boolean }
   | { day: "Tuesday"; checked: boolean }
-  | { day: "Wednseday"; checked: boolean }
+  | { day: "Wednesday"; checked: boolean }
   | { day: "Thursday"; checked: boolean }
   | { day: "Friday"; checked: boolean };
 
 export type UserData = {
   _id?: string;
   days: WeekDaysNames[];
-  task: string[] | string;
+  task: string;
   date: string;
   week?: number;
 };
@@ -40,7 +40,7 @@ const Inputs = (props: InputsProps): JSX.Element => {
   const [weekDays, setWeekDays] = useState<Weekdays[]>([
     { day: "Monday", checked: false },
     { day: "Tuesday", checked: false },
-    { day: "Wednseday", checked: false },
+    { day: "Wednesday", checked: false },
     { day: "Thursday", checked: false },
     { day: "Friday", checked: false },
   ]);
